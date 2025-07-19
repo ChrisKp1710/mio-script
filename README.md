@@ -2,7 +2,44 @@
 
 # �️ Setup Intelligente Dev Environment
 
-### *Script automatico che installa solo quello che manca* �
+### *Scr<div align="center">
+
+### 🚀 **Quick S<div align="center">
+
+### 🛠️🛠️ **Stack completo installato**
+
+</div>art**
+
+``<div align="center">
+
+## 📊 **Report HTML Professionale**
+
+Dopo l'esecuzione, tro```
+
+</div>
+
+<div align="center">
+
+## 🛠️ **Troubleshooting**ai un bellissimo report in `~/Documenti/setup-riepilogo.html`:
+
+🎨 **Design Moderno** → Glass morphism, gradienti, animazioni  
+📱 **Mobile Responsive** → Ottimizzato per ogni dispositivo  
+📅 **Timestamp Dinamico** → Ora sempre aggiornata (multi-timezone). Clone del repository  
+git clone https://github.com/ChrisKp1710/mio-script.git
+cd mio-script
+
+# 2. Rendi eseguibile
+chmod +x dev-full-bootstrap.sh
+
+# 3. Esegui (richiede sudo)
+sudo ./dev-full-bootstrap.sh
+```
+
+**💡 Pro Tip**: Lo script è **idempotente** - puoi eseguirlo più volte senza problemi!
+- **Prima volta**: Installa tutto quello che serve
+- **Esecuzioni successive**: Aggiorna solo quello necessario
+
+</div>e installa solo quello che manca* �
 
 **Trasforma il tuo Fedora in una macchina da sviluppo in 5 minuti - Zero sprechi!**
 
@@ -42,6 +79,8 @@
 
 </div>
 
+<div align="center">
+
 ### 🎯 **Perfetto se sei...**
 
 <table>
@@ -53,9 +92,11 @@
 </tr>
 </table>
 
-### 🧠 **Funzionalità Intelligenti**
+</div>
 
 <div align="center">
+
+### 🧠 **Funzionalità Intelligenti**
 
 | 🎯 **Smart Detection** | ⚡ **Installazione Selettiva** | 📊 **Riepilogo Dettagliato** |
 |---|---|---|
@@ -131,9 +172,6 @@ sudo ./dev-full-bootstrap.sh
 <details>
 <summary>🐳 <b>DevOps & Containers</b></summary>
 
-<details>
-<summary>🐳 <b>DevOps & Containers</b></summary>
-
 ```
 🐳 Docker + Docker Compose (orchestration)
 🔨 Podman + Buildah (Red Hat container stack)  
@@ -174,6 +212,8 @@ Dopo l'esecuzione, troverai un bellissimo report in `~/Documenti/setup-riepilogo
 
 </div>
 
+<div align="center">
+
 ## 🔄 **Esempi d'Uso Intelligente**
 
 <table align="center">
@@ -212,6 +252,10 @@ sudo ./dev-full-bootstrap.sh
 </td>
 </tr>
 </table>
+
+</div>
+
+<div align="center">
 
 ## 🚀 **Quick Start dopo Setup**
 
@@ -266,6 +310,10 @@ yarn --version
 
 </details>
 
+</div>
+
+<div align="center">
+
 ---
 
 ## 🤝 **Contribuire**
@@ -285,7 +333,7 @@ I contributi sono super benvenuti!
 - [ ] Dotfiles configuration
 - [ ] Package managers aggiuntivi (pnpm, bun)
 
----
+</div>
 
 <div align="center">
 
