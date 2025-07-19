@@ -635,6 +635,34 @@ cat <<EOF > "/home/$SUDO_USER/Documenti/setup-riepilogo.html"
       color: #cbd5e0;
     }
     
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer .links a {
+      color: #4facfe;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(79, 172, 254, 0.1);
+      border: 1px solid rgba(79, 172, 254, 0.2);
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .footer .links a:hover {
+      background: rgba(79, 172, 254, 0.2);
+      border-color: rgba(79, 172, 254, 0.4);
+      transform: translateY(-2px);
+      color: #00f2fe;
+    }
+    
     @media (max-width: 768px) {
       h1 { font-size: 2rem; }
       .tools-grid { grid-template-columns: 1fr; }
@@ -754,6 +782,13 @@ cat <<EOF > "/home/$SUDO_USER/Documenti/setup-riepilogo.html"
     <div class="footer">
       <p>Setup automatico creato con ❤️ da Christian K.P.</p>
       <p>Fedora Development Environment • 2025</p>
+      
+      <div class="links">
+        <a href="https://kodechris.dev/" target="_blank">🌐 KodeChris.dev</a>
+        <a href="https://github.com/ChrisKp1710" target="_blank">💻 GitHub</a>
+        <a href="https://www.linkedin.com/in/christian-koscielniak-pinto" target="_blank">💼 LinkedIn</a>
+        <a href="mailto:christian@kodechris.dev">📧 Email</a>
+      </div>
     </div>
   </div>
 </body>
