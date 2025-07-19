@@ -20,11 +20,12 @@ BOLD='\033[1m'
 RESET='\033[0m'
 
 ## Logger
-log()   { echo -e "${GREEN}[✔]${RESET} $1"; }
-warn()  { echo -e "${YELLOW}[⚠]${RESET} $1"; }
-error() { echo -e "${RED}[✘]${RESET} $1"; }
-title() { echo -e "\n${BLUE}🔹 ${BOLD}$1${RESET}"; }
-skip()  { echo -e "${BLUE}[→]${RESET} $1 già presente - skip"; }
+log()     { echo -e "${GREEN}[✔]${RESET} $1"; }
+warn()    { echo -e "${YELLOW}[⚠]${RESET} $1"; }
+error()   { echo -e "${RED}[✘]${RESET} $1"; }
+success() { echo -e "${GREEN}${BOLD}$1${RESET}"; }
+title()   { echo -e "\n${BLUE}🔹 ${BOLD}$1${RESET}"; }
+skip()    { echo -e "${BLUE}[→]${RESET} $1 già presente - skip"; }
 
 ## Array per tracciare cosa viene installato
 INSTALLED_ITEMS=()
@@ -34,6 +35,28 @@ SKIPPED_ITEMS=()
 if [[ $EUID -ne 0 ]]; then
   error "Devi eseguire questo script con sudo!"
   exit 1
+fi
+
+## Verifica che siamo su Fedora
+title "Verifica sistema operativo"
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    if [[ "$ID" != "fedora" ]]; then
+        error "Questo script è ottimizzato per Fedora Workstation"
+        error "Sistema rilevato: $PRETTY_NAME"
+        error "Vuoi continuare comunque? Potrebbero esserci problemi con i pacchetti"
+        read -p "Continuare? (y/N): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            log "Operazione annullata dall'utente"
+            exit 0
+        fi
+        warn "⚠️  Continuando su sistema non-Fedora - potrebbero verificarsi errori"
+    else
+        log "✅ Sistema Fedora $VERSION_ID rilevato - perfetto!"
+    fi
+else
+    warn "⚠️  Impossibile rilevare la distribuzione, continuo comunque..."
 fi
 
 ## Funzioni di controllo
@@ -65,8 +88,14 @@ fi
 ## ───────────────────────────────────────
 title "Tool base per ogni sviluppatore"
 
-# Array dei tool base da controllare
-BASE_TOOLS=("git" "curl" "wget" "unzip" "tar" "htop" "btop" "zsh" "neovim" "jq" "gcc" "make" "cmake" "python3-pip" "bat" "ripgrep" "fd-find" "fzf" "tmux")
+# Array dei tool base da controllare (con alternative per diverse versioni Fedora)
+BASE_TOOLS=("git" "curl" "wget" "unzip" "tar" "htop" "zsh" "neovim" "jq" "gcc" "make" "cmake" "python3-pip" "bat" "ripgrep" "fd-find" "fzf" "tmux")
+
+# btop potrebbe non essere disponibile su Fedora più vecchie
+if dnf info btop &>/dev/null; then
+    BASE_TOOLS+=("btop")
+fi
+
 MISSING_TOOLS=()
 
 # Controlla quali tool mancano
@@ -82,6 +111,12 @@ for tool in "${BASE_TOOLS[@]}"; do
                 MISSING_TOOLS+=("$tool")
             fi
             ;;
+        "bat")
+            # Su alcune versioni di Fedora potrebbe chiamarsi "batcat"
+            if ! check_command "bat" && ! check_command "batcat"; then
+                MISSING_TOOLS+=("$tool")
+            fi
+            ;;
         *)
             if ! check_command "$tool"; then
                 MISSING_TOOLS+=("$tool")
@@ -90,11 +125,35 @@ for tool in "${BASE_TOOLS[@]}"; do
     esac
 done
 
-# Installa solo i tool mancanti
+# Installa solo i tool mancanti con gestione errori migliorata
 if [ ${#MISSING_TOOLS[@]} -gt 0 ]; then
     log "Installazione tool mancanti: ${MISSING_TOOLS[*]}"
-    dnf install -y "${MISSING_TOOLS[@]}" || error "Errore installazione tool base"
-    INSTALLED_ITEMS+=("Tool base: ${MISSING_TOOLS[*]}")
+    
+    # Tenta l'installazione e gestisci eventuali errori
+    FAILED_TOOLS=()
+    for tool in "${MISSING_TOOLS[@]}"; do
+        if ! dnf install -y "$tool" 2>/dev/null; then
+            warn "⚠️  Impossibile installare: $tool"
+            FAILED_TOOLS+=("$tool")
+        fi
+    done
+    
+    # Report risultati
+    SUCCESSFUL_TOOLS=()
+    for tool in "${MISSING_TOOLS[@]}"; do
+        if [[ ! " ${FAILED_TOOLS[@]} " =~ " ${tool} " ]]; then
+            SUCCESSFUL_TOOLS+=("$tool")
+        fi
+    done
+    
+    if [ ${#SUCCESSFUL_TOOLS[@]} -gt 0 ]; then
+        INSTALLED_ITEMS+=("Tool base: ${SUCCESSFUL_TOOLS[*]}")
+    fi
+    
+    if [ ${#FAILED_TOOLS[@]} -gt 0 ]; then
+        warn "❌ Alcuni tool non sono stati installati: ${FAILED_TOOLS[*]}"
+        SKIPPED_ITEMS+=("Tool non disponibili: ${FAILED_TOOLS[*]}")
+    fi
 else
     skip "Tutti i tool base sono già installati"
     SKIPPED_ITEMS+=("Tool base")
@@ -105,11 +164,20 @@ fi
 ## ───────────────────────────────────────
 title "Frontend Web Dev (React, Next.js, Tailwind)"
 
-# Controlla Node.js
+# Controlla Node.js (con supporto per nodejs e node)
 if ! check_command "node"; then
     log "Installazione Node.js..."
-    dnf install -y nodejs || error "Errore installazione Node.js"
-    INSTALLED_ITEMS+=("Node.js")
+    
+    # Prova prima "nodejs" poi "node"
+    if dnf install -y nodejs npm &>/dev/null; then
+        INSTALLED_ITEMS+=("Node.js + npm")
+    elif dnf install -y node npm &>/dev/null; then
+        INSTALLED_ITEMS+=("Node.js + npm")  
+    else
+        warn "❌ Impossibile installare Node.js tramite dnf"
+        warn "Potresti dover installarlo manualmente o abilitare repository aggiuntivi"
+        SKIPPED_ITEMS+=("Node.js (installazione fallita)")
+    fi
 else
     skip "Node.js"
     SKIPPED_ITEMS+=("Node.js")
@@ -146,8 +214,16 @@ title "Rust + Tauri"
 # Controlla se Rust è installato
 if ! check_user_command "cargo"; then
     log "Installazione Rust per $SUDO_USER..."
-    su - "$SUDO_USER" -c 'curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y'
-    INSTALLED_ITEMS+=("Rust toolchain")
+    
+    # Prova l'installazione tramite rustup
+    if su - "$SUDO_USER" -c 'curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y' &>/dev/null; then
+        INSTALLED_ITEMS+=("Rust toolchain")
+    else
+        warn "❌ Impossibile installare Rust tramite rustup"
+        warn "Verifica la connessione internet e riprova manualmente con:"
+        warn "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+        SKIPPED_ITEMS+=("Rust toolchain (installazione fallita)")
+    fi
 else
     skip "Rust"
     SKIPPED_ITEMS+=("Rust toolchain")
@@ -159,8 +235,18 @@ su - "$SUDO_USER" -c "source ~/.cargo/env" 2>/dev/null || true
 # Controlla e installa tauri-cli
 if ! su - "$SUDO_USER" -c "source ~/.cargo/env && cargo install --list | grep -q tauri-cli" 2>/dev/null; then
     log "Installazione tauri-cli... (può richiedere alcuni minuti)"
-    su - "$SUDO_USER" -c "source ~/.cargo/env && cargo install tauri-cli"
-    INSTALLED_ITEMS+=("Tauri CLI")
+    
+    if su - "$SUDO_USER" -c "source ~/.cargo/env && cargo install tauri-cli" &>/dev/null; then
+        INSTALLED_ITEMS+=("Tauri CLI")
+    else
+        warn "❌ Impossibile installare tauri-cli"
+        warn "Possibili cause:"
+        warn "  - Rust non configurato correttamente"
+        warn "  - Dipendenze di compilazione mancanti"
+        warn "  - Problemi di rete durante il download"
+        warn "Riprova manualmente con: cargo install tauri-cli"
+        SKIPPED_ITEMS+=("Tauri CLI (installazione fallita)")
+    fi
 else
     skip "Tauri CLI"
     SKIPPED_ITEMS+=("Tauri CLI")
@@ -221,31 +307,66 @@ done
 # Installa solo i tool mancanti
 if [ ${#MISSING_CONTAINER_TOOLS[@]} -gt 0 ]; then
     log "Installazione container tools mancanti: ${MISSING_CONTAINER_TOOLS[*]}"
-    dnf install -y "${MISSING_CONTAINER_TOOLS[@]}" || warn "Errore installazione alcuni container tools"
-    INSTALLED_ITEMS+=("Container tools: ${MISSING_CONTAINER_TOOLS[*]}")
+    
+    # Installa individualmente per gestire meglio gli errori
+    SUCCESSFUL_INSTALLS=()
+    FAILED_INSTALLS=()
+    
+    for tool in "${MISSING_CONTAINER_TOOLS[@]}"; do
+        if dnf install -y "$tool" &>/dev/null; then
+            SUCCESSFUL_INSTALLS+=("$tool")
+        else
+            FAILED_INSTALLS+=("$tool")
+        fi
+    done
+    
+    if [ ${#SUCCESSFUL_INSTALLS[@]} -gt 0 ]; then
+        INSTALLED_ITEMS+=("Container tools: ${SUCCESSFUL_INSTALLS[*]}")
+    fi
+    
+    if [ ${#FAILED_INSTALLS[@]} -gt 0 ]; then
+        warn "❌ Impossibile installare: ${FAILED_INSTALLS[*]}"
+        warn "Alcuni container tools potrebbero non essere disponibili nel tuo repository"
+        SKIPPED_ITEMS+=("Container tools falliti: ${FAILED_INSTALLS[*]}")
+    fi
 else
     skip "Container tools"
     SKIPPED_ITEMS+=("Container tools")
 fi
 
-# Controlla se Docker service è attivo
-if systemctl is-enabled docker &>/dev/null && systemctl is-active docker &>/dev/null; then
-    skip "Docker service"
-    SKIPPED_ITEMS+=("Docker service")
-else
-    log "Abilitazione Docker service..."
-    systemctl enable --now docker
-    INSTALLED_ITEMS+=("Docker service abilitato")
-fi
+# Controlla se Docker service è attivo (solo se Docker è installato)
+if check_command "docker"; then
+    if systemctl is-enabled docker &>/dev/null && systemctl is-active docker &>/dev/null; then
+        skip "Docker service"
+        SKIPPED_ITEMS+=("Docker service")
+    else
+        log "Abilitazione Docker service..."
+        if systemctl enable --now docker &>/dev/null; then
+            INSTALLED_ITEMS+=("Docker service abilitato")
+        else
+            warn "❌ Impossibile avviare il servizio Docker"
+            warn "Potresti dover avviarlo manualmente con: sudo systemctl enable --now docker"
+            SKIPPED_ITEMS+=("Docker service (avvio fallito)")
+        fi
+    fi
 
-# Controlla se utente è nel gruppo docker
-if groups "$SUDO_USER" | grep -q docker; then
-    skip "Utente nel gruppo Docker"
-    SKIPPED_ITEMS+=("Gruppo Docker")
+    # Controlla se utente è nel gruppo docker
+    if groups "$SUDO_USER" | grep -q docker; then
+        skip "Utente nel gruppo Docker"
+        SKIPPED_ITEMS+=("Gruppo Docker")
+    else
+        log "Aggiunta utente $SUDO_USER al gruppo docker..."
+        if usermod -aG docker "$SUDO_USER" &>/dev/null; then
+            INSTALLED_ITEMS+=("Utente aggiunto al gruppo Docker")
+            warn "⚠️  Riavvia la sessione per applicare i permessi Docker"
+        else
+            warn "❌ Impossibile aggiungere utente al gruppo Docker"
+            SKIPPED_ITEMS+=("Gruppo Docker (aggiunta fallita)")
+        fi
+    fi
 else
-    log "Aggiunta utente $SUDO_USER al gruppo docker..."
-    usermod -aG docker "$SUDO_USER"
-    INSTALLED_ITEMS+=("Utente aggiunto al gruppo Docker")
+    skip "Docker service (Docker non installato)"
+    SKIPPED_ITEMS+=("Docker service")
 fi
 
 ## ───────────────────────────────────────
@@ -258,23 +379,41 @@ if ! check_command "code"; then
     
     # Controlla se la chiave Microsoft è già importata
     if ! rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}-%{RELEASE}\t%{SUMMARY}\n' | grep -q "Microsoft"; then
-        rpm --import https://packages.microsoft.com/keys/microsoft.asc
-        INSTALLED_ITEMS+=("Chiave Microsoft importata")
+        if rpm --import https://packages.microsoft.com/keys/microsoft.asc &>/dev/null; then
+            INSTALLED_ITEMS+=("Chiave Microsoft importata")
+        else
+            warn "❌ Impossibile importare la chiave Microsoft"
+            SKIPPED_ITEMS+=("Chiave Microsoft (importazione fallita)")
+        fi
     fi
     
     # Controlla se il repository VS Code esiste
     if [ ! -f /etc/yum.repos.d/vscode.repo ]; then
-        sh -c 'echo -e "[code]
+        if sh -c 'echo -e "[code]
 name=Visual Studio Code
 baseurl=https://packages.microsoft.com/yumrepos/vscode
 enabled=1
 gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-        INSTALLED_ITEMS+=("Repository VS Code configurato")
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo' &>/dev/null; then
+            INSTALLED_ITEMS+=("Repository VS Code configurato")
+        else
+            warn "❌ Impossibile configurare il repository VS Code"
+            SKIPPED_ITEMS+=("Repository VS Code (configurazione fallita)")
+        fi
     fi
     
-    dnf install -y code || error "Errore installazione VS Code"
-    INSTALLED_ITEMS+=("VS Code")
+    # Prova l'installazione di VS Code
+    if dnf install -y code &>/dev/null; then
+        INSTALLED_ITEMS+=("VS Code")
+    else
+        warn "❌ Impossibile installare VS Code"
+        warn "Possibili cause:"
+        warn "  - Repository Microsoft non configurato correttamente"
+        warn "  - Problemi di connessione internet"
+        warn "  - Conflitti con pacchetti esistenti"
+        warn "Prova l'installazione manuale da: https://code.visualstudio.com/"
+        SKIPPED_ITEMS+=("VS Code (installazione fallita)")
+    fi
 else
     skip "VS Code"
     SKIPPED_ITEMS+=("VS Code")
@@ -796,3 +935,56 @@ cat <<EOF > "/home/$SUDO_USER/Documenti/setup-riepilogo.html"
 EOF
 
 log "Riepilogo generato in: /home/$SUDO_USER/Documenti/setup-riepilogo.html"
+
+## ───────────────────────────────────────
+## 📊 RIEPILOGO FINALE
+## ───────────────────────────────────────
+
+title "Setup completato!"
+
+# Statistiche finali
+TOTAL_INSTALLED=${#INSTALLED_ITEMS[@]}
+TOTAL_SKIPPED=${#SKIPPED_ITEMS[@]}
+TOTAL_ITEMS=$((TOTAL_INSTALLED + TOTAL_SKIPPED))
+
+success "✅ INSTALLAZIONE COMPLETATA!"
+echo ""
+echo "📊 STATISTICHE:"
+echo "  • Componenti installati: $TOTAL_INSTALLED"
+echo "  • Componenti già presenti: $TOTAL_SKIPPED"
+echo "  • Totale verificato: $TOTAL_ITEMS"
+echo ""
+
+if [ $TOTAL_INSTALLED -gt 0 ]; then
+    echo "🆕 COMPONENTI INSTALLATI:"
+    for item in "${INSTALLED_ITEMS[@]}"; do
+        echo "  ✅ $item"
+    done
+    echo ""
+fi
+
+if [ $TOTAL_SKIPPED -gt 0 ]; then
+    echo "⏭️  COMPONENTI GIÀ PRESENTI:"
+    for item in "${SKIPPED_ITEMS[@]}"; do
+        if [[ "$item" == *"fallita"* ]] || [[ "$item" == *"falliti"* ]]; then
+            echo "  ❌ $item"
+        else
+            echo "  ✅ $item"
+        fi
+    done
+    echo ""
+fi
+
+# Suggerimenti post-installazione
+echo "💡 PROSSIMI PASSI:"
+echo "  1. Riavvia il terminale per applicare le modificazioni al PATH"
+echo "  2. Se hai installato Docker, riavvia la sessione per i permessi"
+echo "  3. Verifica le installazioni con: node --version, cargo --version, docker --version"
+echo "  4. Apri il riepilogo HTML per maggiori dettagli"
+echo ""
+
+success "🎉 Il tuo ambiente di sviluppo Fedora è pronto!"
+echo ""
+echo "💻 Creato da Christian K.P. - https://kodechris.dev"
+echo "📧 Supporto: christian@kodechris.dev"
+echo ""
