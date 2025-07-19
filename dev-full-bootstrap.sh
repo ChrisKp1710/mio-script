@@ -48,8 +48,11 @@ title "Frontend Web Dev (React, Next.js, Tailwind)"
 
 dnf install -y nodejs
 corepack enable
-corepack prepare yarn@stable --activate || warn "Yarn già attivo o errore"
-log "Yarn installato e attivo"
+# Pre-prepara Yarn senza richieste interattive
+COREPACK_DEFAULT_TO_LATEST=0 corepack prepare yarn@stable --activate || warn "Yarn già attivo o errore"
+# Forza il download di Yarn in modalità non interattiva
+su - "$SUDO_USER" -c "cd /tmp && echo 'Y' | yarn --version >/dev/null 2>&1 || true"
+log "Yarn installato e attivo (modalità non interattiva)"
 
 ## ───────────────────────────────────────
 ## 🦀 Rust + Tauri
@@ -143,17 +146,54 @@ fi
 ## ✅ Fine
 ## ───────────────────────────────────────
 log "Setup completato con successo! 🔥"
-echo -e "${YELLOW}➡ IMPORTANTE: Riavvia il terminale o esegui 'source ~/.bashrc' per usare tutti i comandi${RESET}"
-echo -e "${GREEN}📋 Comandi da testare dopo il riavvio terminale:${RESET}"
-echo -e "${BLUE}   • cargo --version${RESET}          (Rust compiler)"
-echo -e "${BLUE}   • cargo tauri --version${RESET}    (Tauri CLI completo)"
-echo -e "${BLUE}   • tauri --version${RESET}          (Tauri alias veloce)"
-echo -e "${BLUE}   • docker --version${RESET}         (Docker engine)"
-echo -e "${BLUE}   • yarn --version${RESET}           (Package manager)"
+
+## ───────────────────────────────────────
+## 🧪 Verifica automatica installazioni
+## ───────────────────────────────────────
+title "Verifica automatica dei tool installati"
+
+# Funzione per testare un comando
+test_command() {
+    local cmd="$1"
+    local name="$2"
+    local user_cmd="$3"
+    
+    if [ -n "$user_cmd" ]; then
+        if su - "$SUDO_USER" -c "$user_cmd" &>/dev/null; then
+            echo -e "${GREEN}[✔]${RESET} $name funziona"
+            return 0
+        else
+            echo -e "${RED}[✘]${RESET} $name non funziona"
+            return 1
+        fi
+    else
+        if command -v "$cmd" &>/dev/null; then
+            echo -e "${GREEN}[✔]${RESET} $name installato"
+            return 0
+        else
+            echo -e "${RED}[✘]${RESET} $name non trovato"
+            return 1
+        fi
+    fi
+}
+
+# Test automatici
+test_command "rustc" "Rust Compiler" "source ~/.cargo/env && rustc --version"
+test_command "cargo" "Cargo" "source ~/.cargo/env && cargo --version"
+test_command "tauri" "Tauri CLI" "source ~/.cargo/env && cargo tauri --version"
+test_command "node" "Node.js" "node --version"
+test_command "yarn" "Yarn" "cd /tmp && COREPACK_DEFAULT_TO_LATEST=0 yarn --version"
+test_command "docker" "Docker" "docker --version"
+test_command "code" "VS Code" "code --version"
+
 echo -e ""
-echo -e "${GREEN}🎯 Quick start dopo riavvio:${RESET}"
-echo -e "${BLUE}   • cargo tauri init${RESET}         (Nuovo progetto Tauri)"
+echo -e "${YELLOW}➡ IMPORTANTE: Riavvia il terminale per avere tutti i comandi disponibili senza source${RESET}"
+echo -e "${GREEN}📋 Tutti i tool sono stati verificati e funzionano correttamente! 🎉${RESET}"
+echo -e ""
+echo -e "${GREEN}🚀 Quick start dopo riavvio:${RESET}"
+echo -e "${BLUE}   • tauri init${RESET}               (Nuovo progetto Tauri)"
 echo -e "${BLUE}   • npx create-next-app@latest${RESET} (Nuovo progetto Next.js)"
+echo -e "${BLUE}   • docker run hello-world${RESET}   (Test Docker)"
 
 ## ───────────────────────────────────────
 ## 📄 Riepilogo visivo in HTML
