@@ -27,7 +27,9 @@
 ![Last Commit](https://img.shields.io/github/last-commit/ChrisKp1710/mio-script?style=flat-square&color=00D4AA&logo=git)
 ![Forks](https://img.shields.io/github/forks/ChrisKp1710/mio-script?style=flat-square&color=orange&logo=github)
 
-</div>## ✨ Il setup dei tuoi sogni
+</div>
+
+## ✨ Il setup dei tuoi sogni
 
 Stop a ore di configurazioni noiose! 🙄 Questo script installa **tutto quello che ti serve** per:
 
@@ -40,7 +42,9 @@ Stop a ore di configurazioni noiose! 🙄 Questo script installa **tutto quello 
 
 </div>
 
----## 🧠 Perché questo script è speciale?
+---
+
+## 🧠 Perché questo script è speciale?
 
 ### ⚡ **Smart Detection** - Zero sprechi!
 
