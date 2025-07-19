@@ -56,18 +56,58 @@ log "Yarn installato e attivo"
 ## ───────────────────────────────────────
 title "Rust + Tauri"
 
+# Funzione per controllare se Rust è installato
 if ! su - "$SUDO_USER" -c "command -v cargo &> /dev/null"; then
   log "Installazione Rust per $SUDO_USER..."
-  su - "$SUDO_USER" -c 'curl https://sh.rustup.rs -sSf | sh -s -- -y && source "$HOME/.cargo/env"'
+  su - "$SUDO_USER" -c 'curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y'
+  log "Rust installato con successo"
 else
   log "Rust già presente"
 fi
 
-if ! su - "$SUDO_USER" -c "cargo install --list | grep -q tauri-cli"; then
-  log "Installazione tauri-cli..."
+# Assicurati che il PATH cargo sia disponibile
+su - "$SUDO_USER" -c "source ~/.cargo/env"
+
+# Controlla e installa tauri-cli
+if ! su - "$SUDO_USER" -c "source ~/.cargo/env && cargo install --list | grep -q tauri-cli"; then
+  log "Installazione tauri-cli... (può richiedere alcuni minuti)"
   su - "$SUDO_USER" -c "source ~/.cargo/env && cargo install tauri-cli"
+  log "tauri-cli installato con successo"
 else
   log "tauri-cli già installato"
+fi
+
+# Aggiunge ~/.cargo/bin al PATH per entrambe le shell
+CARGO_ENV_BASH='source "$HOME/.cargo/env"'
+CARGO_ENV_ZSH='source "$HOME/.cargo/env"'
+
+# Aggiungi a .bashrc se non presente
+if ! su - "$SUDO_USER" -c "grep -q 'source.*\.cargo/env' ~/.bashrc 2>/dev/null"; then
+  su - "$SUDO_USER" -c "echo '' >> ~/.bashrc"
+  su - "$SUDO_USER" -c "echo '# Rust environment' >> ~/.bashrc"
+  su - "$SUDO_USER" -c "echo '$CARGO_ENV_BASH' >> ~/.bashrc"
+  # Aggiungi alias per tauri
+  su - "$SUDO_USER" -c "echo 'alias tauri=\"cargo tauri\"' >> ~/.bashrc"
+  log "Aggiunto Rust environment e alias tauri a .bashrc"
+fi
+
+# Aggiungi a .zshrc se non presente (e se il file esiste)
+if su - "$SUDO_USER" -c "test -f ~/.zshrc"; then
+  if ! su - "$SUDO_USER" -c "grep -q 'source.*\.cargo/env' ~/.zshrc 2>/dev/null"; then
+    su - "$SUDO_USER" -c "echo '' >> ~/.zshrc"
+    su - "$SUDO_USER" -c "echo '# Rust environment' >> ~/.zshrc"
+    su - "$SUDO_USER" -c "echo '$CARGO_ENV_ZSH' >> ~/.zshrc"
+    # Aggiungi alias per tauri
+    su - "$SUDO_USER" -c "echo 'alias tauri=\"cargo tauri\"' >> ~/.zshrc"
+    log "Aggiunto Rust environment e alias tauri a .zshrc"
+  fi
+fi
+
+# Test finale per verificare che tauri sia accessibile
+if su - "$SUDO_USER" -c "source ~/.cargo/env && command -v cargo-tauri &> /dev/null"; then
+  log "✅ Tauri CLI verificato e funzionante"
+else
+  warn "⚠️  Tauri CLI installato ma potrebbe richiedere riavvio terminale"
 fi
 
 ## ───────────────────────────────────────
@@ -103,7 +143,17 @@ fi
 ## ✅ Fine
 ## ───────────────────────────────────────
 log "Setup completato con successo! 🔥"
-echo -e "${YELLOW}➡ Riavvia il terminale per applicare i gruppi Docker${RESET}"
+echo -e "${YELLOW}➡ IMPORTANTE: Riavvia il terminale o esegui 'source ~/.bashrc' per usare tutti i comandi${RESET}"
+echo -e "${GREEN}📋 Comandi da testare dopo il riavvio terminale:${RESET}"
+echo -e "${BLUE}   • cargo --version${RESET}          (Rust compiler)"
+echo -e "${BLUE}   • cargo tauri --version${RESET}    (Tauri CLI completo)"
+echo -e "${BLUE}   • tauri --version${RESET}          (Tauri alias veloce)"
+echo -e "${BLUE}   • docker --version${RESET}         (Docker engine)"
+echo -e "${BLUE}   • yarn --version${RESET}           (Package manager)"
+echo -e ""
+echo -e "${GREEN}🎯 Quick start dopo riavvio:${RESET}"
+echo -e "${BLUE}   • cargo tauri init${RESET}         (Nuovo progetto Tauri)"
+echo -e "${BLUE}   • npx create-next-app@latest${RESET} (Nuovo progetto Next.js)"
 
 ## ───────────────────────────────────────
 ## 📄 Riepilogo visivo in HTML
