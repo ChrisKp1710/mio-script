@@ -1,5 +1,379 @@
 <div align="center">
 
+# 🔥 Dev Environment Bootstrap
+
+### *One script to rule them all* 🧙‍♂️
+
+**Trasforma il tuo Fedora in una macchina da sviluppo in 5 minuti**
+
+<br>
+
+<!-- Tech Stack Badges -->
+
+![Fedora](https://img.shields.io/badge/Fedora_Workstation-51A2DA?style=for-the-badge&logo=fedora&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Tauri](https://img.shields.io/badge/Tauri-24C8DB?style=for-the-badge&logo=tauri&logoColor=white)
+
+<br>
+
+<!-- Project Status Badges -->
+
+![License](https://img.shields.io/badge/license-MIT-00D4AA?style=flat-square&logo=opensourceinitiative&logoColor=white)
+![Stars](https://img.shields.io/github/stars/ChrisKp1710/mio-script?style=flat-square&color=FFD700&logo=github)
+![Last Commit](https://img.shields.io/github/last-commit/ChrisKp1710/mio-script?style=flat-square&color=00D4AA&logo=git)
+![Forks](https://img.shields.io/github/forks/ChrisKp1710/mio-script?style=flat-square&color=orange&logo=github)
+
+## ✨ Il setup dei tuoi sogni
+
+Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello che ti serve per:
+
+<div align="center">
+
+🌐 **Web Development** → React, Next.js, Tailwind
+🦀 **Desktop Apps** → Rust + Tauri
+🐳 **DevOps** → Docker, Containers
+💻 **Pro Coding** → VS Code, terminal potenziato
+
+</div>
+
+### 🎯 **Perfetto se sei...**
+
+<table>
+<tr>
+<td align="center">🎓<br><b>Studente</b><br>Setup università in un click</td>
+<td align="center">👨‍💼<br><b>Professionista</b><br>Ambiente pronto per progetti</td>
+<td align="center">🚀<br><b>Startup</b><br>Development stack completo</td>
+<td align="center">🎮<br><b>Indie Dev</b><br>Web + desktop app ready</td>
+</tr>
+</table>
+
+### 🛠️ **Stack completo installato**
+
+<details>
+<summary>🧰 <b>Developer Tools</b> <i>(click per espandere)</i></summary>
+
+```
+✅ Git & Version Control
+✅ Zsh (shell moderna) + Neovim (editor potente)  
+✅ Htop, btop (monitoraggio sistema)
+✅ Ripgrep, fzf (ricerca super veloce)
+✅ Tmux (terminale multiplo)
+✅ Compilatori C/C++ (gcc, cmake)
+```
+
+</details>
+
+<details>
+<summary>🌐 <b>Frontend Web Stack</b></summary>
+
+```
+🚀 Node.js (runtime JavaScript)
+📦 Yarn (package manager veloce)  
+⚛️ Ready per: React, Next.js, Vue, Svelte
+🎨 Tailwind CSS supportato
+🔧 Build tools moderni inclusi
+```
+
+</details>
+
+<details>
+<summary>🦀 <b>Rust + Desktop Development</b></summary>
+
+```
+🦀 Rust Toolchain completo
+🖥️ Tauri CLI (app desktop native)
+⚡ Performance native + Web UI
+🔒 App sicure e leggere
+🌍 Cross-platform ready
+```
+
+</details>
+
+<details>
+<summary>🐳 <b>DevOps & Containers</b></summary>
+
+```
+🐳 Docker + Docker Compose
+🔨 Podman + Buildah (alternative Red Hat)
+☁️ Pronto per deployment cloud
+🔄 CI/CD ready
+🛡️ Sicurezza enterprise
+```
+
+</details>
+
+<details>
+<summary>💻 <b>Professional Editor</b></summary>
+
+```
+📝 Visual Studio Code (official Microsoft)
+🔌 Extensions ecosystem
+🐛 Debugging integrato  
+📊 Git integration
+🎨 Temi e personalizzazioni
+```
+
+</details>
+
+## 🚀 **Quick Start**
+
+> ⏱️ *Tempo richiesto: 5-10 minuti*
+
+### 🎯 **Metodo veloce** *(consigliato)*
+
+```bash
+# 💨 One-liner magic
+curl -sSL https://raw.githubusercontent.com/ChrisKp1710/mio-script/main/dev-full-bootstrap.sh | sudo bash
+```
+
+### 🔧 **Metodo sicuro** *(se vuoi controllare prima)*
+
+```bash
+# 1️⃣ Scarica e ispeziona
+wget https://raw.githubusercontent.com/ChrisKp1710/mio-script/main/dev-full-bootstrap.sh
+cat dev-full-bootstrap.sh  # 👀 Dai un'occhiata
+
+# 2️⃣ Rendi eseguibile ed esegui  
+chmod +x dev-full-bootstrap.sh
+sudo ./dev-full-bootstrap.sh
+```
+
+### 🏗️ **Metodo developer**
+
+```bash
+git clone https://github.com/ChrisKp1710/mio-script.git
+cd mio-script
+sudo ./dev-full-bootstrap.sh
+```
+
+---
+
+### ⚠️ **Prima di iniziare**
+
+<div align="center">
+
+
+|  ✅ Requisito  | 📋 Dettagli            |
+| :-------------: | :--------------------- |
+| **🐧 Sistema** | Fedora Workstation 38+ |
+| **🔑 Permessi** | Accesso sudo           |
+| **🌐 Internet** | Connessione stabile    |
+|  **💾 Spazio**  | ~3GB liberi            |
+
+</div>
+
+## 🎉 **Post-setup: Sei pronto a creare!**
+
+### ⚡ **Test rapido** *(verifica che tutto funzioni)*
+
+```bash
+# 🌐 Frontend check
+node --version && yarn --version
+
+# 🦀 Rust check  
+rustc --version && cargo tauri --version
+
+# 🐳 Container check
+docker --version && docker run hello-world
+```
+
+### � **Crea il tuo primo progetto**
+
+<table>
+<tr>
+<td>
+
+# 🔥 Dev Environment Bootstrap
+
+### *One script to rule them all* 🧙‍♂️
+
+**Trasforma il tuo Fedora in una macchina da sviluppo in 5 minuti**
+
+<br>
+
+<!-- Tech Stack Badges -->
+
+![Fedora](https://img.shields.io/badge/Fedora_Workstation-51A2DA?style=for-the-badge&logo=fedora&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Tauri](https://img.shields.io/badge/Tauri-24C8DB?style=for-the-badge&logo=tauri&logoColor=white)
+
+<br>
+
+<!-- Project Status Badges -->
+
+![License](https://img.shields.io/badge/license-MIT-00D4AA?style=flat-square&logo=opensourceinitiative&logoColor=white)
+![Stars](https://img.shields.io/github/stars/ChrisKp1710/mio-script?style=flat-square&color=FFD700&logo=github)
+![Last Commit](https://img.shields.io/github/last-commit/ChrisKp1710/mio-script?style=flat-square&color=00D4AA&logo=git)
+![Forks](https://img.shields.io/github/forks/ChrisKp1710/mio-script?style=flat-square&color=orange&logo=github)
+
+## ✨ Il setup dei tuoi sogni
+
+Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello che ti serve per:
+
+<div align="center">
+
+🌐 **Web Development** → React, Next.js, Tailwind
+🦀 **Desktop Apps** → Rust + Tauri
+🐳 **DevOps** → Docker, Containers
+💻 **Pro Coding** → VS Code, terminal potenziato
+
+</div>
+
+### 🎯 **Perfetto se sei...**
+
+<table>
+<tr>
+<td align="center">🎓<br><b>Studente</b><br>Setup università in un click</td>
+<td align="center">👨‍💼<br><b>Professionista</b><br>Ambiente pronto per progetti</td>
+<td align="center">🚀<br><b>Startup</b><br>Development stack completo</td>
+<td align="center">🎮<br><b>Indie Dev</b><br>Web + desktop app ready</td>
+</tr>
+</table>
+
+### 🛠️ **Stack completo installato**
+
+<details>
+<summary>🧰 <b>Developer Tools</b> <i>(click per espandere)</i></summary>
+
+```
+✅ Git & Version Control
+✅ Zsh (shell moderna) + Neovim (editor potente)  
+✅ Htop, btop (monitoraggio sistema)
+✅ Ripgrep, fzf (ricerca super veloce)
+✅ Tmux (terminale multiplo)
+✅ Compilatori C/C++ (gcc, cmake)
+```
+
+</details>
+
+<details>
+<summary>🌐 <b>Frontend Web Stack</b></summary>
+
+```
+🚀 Node.js (runtime JavaScript)
+📦 Yarn (package manager veloce)  
+⚛️ Ready per: React, Next.js, Vue, Svelte
+🎨 Tailwind CSS supportato
+🔧 Build tools moderni inclusi
+```
+
+</details>
+
+<details>
+<summary>🦀 <b>Rust + Desktop Development</b></summary>
+
+```
+🦀 Rust Toolchain completo
+🖥️ Tauri CLI (app desktop native)
+⚡ Performance native + Web UI
+🔒 App sicure e leggere
+🌍 Cross-platform ready
+```
+
+</details>
+
+<details>
+<summary>🐳 <b>DevOps & Containers</b></summary>
+
+```
+🐳 Docker + Docker Compose
+🔨 Podman + Buildah (alternative Red Hat)
+☁️ Pronto per deployment cloud
+🔄 CI/CD ready
+🛡️ Sicurezza enterprise
+```
+
+</details>
+
+<details>
+<summary>💻 <b>Professional Editor</b></summary>
+
+```
+📝 Visual Studio Code (official Microsoft)
+🔌 Extensions ecosystem
+🐛 Debugging integrato  
+📊 Git integration
+🎨 Temi e personalizzazioni
+```
+
+</details>
+
+## 🚀 **Quick Start**
+
+> ⏱️ *Tempo richiesto: 5-10 minuti*
+
+### 🎯 **Metodo veloce** *(consigliato)*
+
+```bash
+# 💨 One-liner magic
+curl -sSL https://raw.githubusercontent.com/ChrisKp1710/mio-script/main/dev-full-bootstrap.sh | sudo bash
+```
+
+### 🔧 **Metodo sicuro** *(se vuoi controllare prima)*
+
+```bash
+# 1️⃣ Scarica e ispeziona
+wget https://raw.githubusercontent.com/ChrisKp1710/mio-script/main/dev-full-bootstrap.sh
+cat dev-full-bootstrap.sh  # 👀 Dai un'occhiata
+
+# 2️⃣ Rendi eseguibile ed esegui  
+chmod +x dev-full-bootstrap.sh
+sudo ./dev-full-bootstrap.sh
+```
+
+### 🏗️ **Metodo developer**
+
+```bash
+git clone https://github.com/ChrisKp1710/mio-script.git
+cd mio-script
+sudo ./dev-full-bootstrap.sh
+```
+
+---
+
+### ⚠️ **Prima di iniziare**
+
+<div align="center">
+
+
+|  ✅ Requisito  | 📋 Dettagli            |
+| :-------------: | :--------------------- |
+| **🐧 Sistema** | Fedora Workstation 38+ |
+| **🔑 Permessi** | Accesso sudo           |
+| **🌐 Internet** | Connessione stabile    |
+|  **💾 Spazio**  | ~3GB liberi            |
+
+</div>
+
+## 🎉 **Post-setup: Sei pronto a creare!**
+
+### ⚡ **Test rapido** *(verifica che tutto funzioni)*
+
+```bash
+# 🌐 Frontend check
+node --version && yarn --version
+
+# 🦀 Rust check  
+rustc --version && cargo tauri --version
+
+# 🐳 Container check
+docker --version && docker run hello-world
+```
+
+### � **Crea il tuo primo progetto**
+
+<table>
+<tr>
+<td>
+
 # �️ Setup Intelligente Dev Environment
 
 ### *Scr<div align="center">
@@ -10,7 +384,7 @@
 
 </div>art**
 
-``<div align="center">
+art**``<div align="center">
 
 ## 📊 **Report HTML Professionale**
 
@@ -22,17 +396,20 @@ Dopo l'esecuzione, tro```
 
 ## 🛠️ **Troubleshooting**ai un bellissimo report in `~/Documenti/setup-riepilogo.html`:
 
-🎨 **Design Moderno** → Glass morphism, gradienti, animazioni  
-📱 **Mobile Responsive** → Ottimizzato per ogni dispositivo  
-📅 **Timestamp Dinamico** → Ora sempre aggiornata (multi-timezone). Clone del repository  
+🎨 **Design Moderno** → Glass morphism, gradienti, animazioni
+📱 **Mobile Responsive** → Ottimizzato per ogni dispositivo
+📅 **Timestamp Dinamico** → Ora sempre aggiornata (multi-timezone). Clone del repository
 git clone https://github.com/ChrisKp1710/mio-script.git
 cd mio-script
 
 # 2. Rendi eseguibile
+
 chmod +x dev-full-bootstrap.sh
 
 # 3. Esegui (richiede sudo)
+
 sudo ./dev-full-bootstrap.sh
+
 ```
 
 **💡 Pro Tip**: Lo script è **idempotente** - puoi eseguirlo più volte senza problemi!
@@ -121,10 +498,11 @@ sudo ./dev-full-bootstrap.sh
 ```
 
 **💡 Pro Tip**: Lo script è **idempotente** - puoi eseguirlo più volte senza problemi!
+
 - **Prima volta**: Installa tutto quello che serve
 - **Esecuzioni successive**: Aggiorna solo quello necessario
 
-### �🛠️ **Stack completo installato**
+### 🀽�️ **Stack completo installato**
 
 <details>
 <summary>🧰 <b>Developer Tools</b> <i>(click per espandere)</i></summary>
@@ -205,10 +583,10 @@ Dopo l'esecuzione, troverai un bellissimo report in `~/Documenti/setup-riepilogo
 
 <div align="center">
 
-🎨 **Design Moderno** → Glass morphism, gradienti, animazioni  
-📱 **Mobile Responsive** → Ottimizzato per ogni dispositivo  
-📅 **Timestamp Dinamico** → Ora sempre aggiornata (multi-timezone)  
-📈 **Statistiche Dettagliate** → Cosa installato vs saltato  
+🎨 **Design Moderno** → Glass morphism, gradienti, animazioni
+📱 **Mobile Responsive** → Ottimizzato per ogni dispositivo
+📅 **Timestamp Dinamico** → Ora sempre aggiornata (multi-timezone)
+📈 **Statistiche Dettagliate** → Cosa installato vs saltato
 
 </div>
 
@@ -224,34 +602,6 @@ Dopo l'esecuzione, troverai un bellissimo report in `~/Documenti/setup-riepilogo
 </tr>
 <tr>
 <td>
-  
-```bash
-sudo ./dev-full-bootstrap.sh
-# ➡️ Installa tutto completo
-# 🎯 Report: 15+ installazioni
-```
-
-</td>
-<td>
-
-```bash  
-sudo ./dev-full-bootstrap.sh
-# ➡️ Solo quello che manca
-# 🎯 Report: 3 installazioni, 12 skip
-```
-
-</td>
-<td>
-
-```bash
-sudo ./dev-full-bootstrap.sh  
-# ➡️ Tutto già presente
-# 🎯 Report: 0 installazioni, 15 skip
-```
-
-</td>
-</tr>
-</table>
 
 </div>
 
@@ -281,6 +631,7 @@ docker run hello-world
 <summary><strong>❓ Tauri CLI non trovato dopo installazione</strong></summary>
 
 **Soluzione**: Riavvia il terminale o esegui:
+
 ```bash
 source ~/.cargo/env
 # Il comando 'tauri' sarà disponibile come alias di 'cargo tauri'
@@ -292,7 +643,8 @@ source ~/.cargo/env
 <summary><strong>❓ Docker permission denied</strong></summary>
 
 **Soluzione**: Riavvia la sessione utente o esegui:
-```bash  
+
+```bash
 newgrp docker
 # Oppure logout/login per attivare il gruppo
 ```
@@ -303,6 +655,7 @@ newgrp docker
 <summary><strong>❓ Yarn non risponde o chiede conferme</strong></summary>
 
 **Soluzione**: Lo script usa modalità non-interattiva, ma se hai problemi:
+
 ```bash
 corepack enable
 yarn --version  
@@ -318,20 +671,21 @@ yarn --version
 
 ## 🤝 **Contribuire**
 
-I contributi sono super benvenuti! 
+I contributi sono super benvenuti!
 
 1. **Fork** il repository 🍴
 2. **Crea** un branch (`git checkout -b feature/AmazingFeature`)
-3. **Commit** (`git commit -m 'Add AmazingFeature'`) 
+3. **Commit** (`git commit -m 'Add AmazingFeature'`)
 4. **Push** (`git push origin feature/AmazingFeature`)
 5. **Apri** una Pull Request 🚀
 
 ### 📈 **Roadmap Ideas**
-- [ ] Supporto Ubuntu/Debian  
-- [ ] Profili personalizzati (Frontend-only, Backend-only)
-- [ ] Auto-install VS Code extensions
-- [ ] Dotfiles configuration
-- [ ] Package managers aggiuntivi (pnpm, bun)
+
+- [ ]  Supporto Ubuntu/Debian
+- [ ]  Profili personalizzati (Frontend-only, Backend-only)
+- [ ]  Auto-install VS Code extensions
+- [ ]  Dotfiles configuration
+- [ ]  Package managers aggiuntivi (pnpm, bun)
 
 </div>
 
@@ -342,7 +696,7 @@ I contributi sono super benvenuti!
 **Christian Koscielniak-Pinto**
 
 [![Portfolio](https://img.shields.io/badge/🌐_Portfolio-kodechris.dev-00D4AA?style=for-the-badge&logo=internet-explorer&logoColor=white)](https://kodechris.dev/)
-[![GitHub](https://img.shields.io/badge/💻_GitHub-ChrisKp1710-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ChrisKp1710)  
+[![GitHub](https://img.shields.io/badge/💻_GitHub-ChrisKp1710-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ChrisKp1710)
 [![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-christian--koscielniak--pinto-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/christian-koscielniak-pinto)
 [![Email](https://img.shields.io/badge/�_Email-christian@kodechris.dev-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:christian@kodechris.dev)
 
@@ -354,7 +708,7 @@ I contributi sono super benvenuti!
 
 ---
 
-**Setup intelligente per sviluppatori moderni** 🚀  
+**Setup intelligente per sviluppatori moderni** 🚀
 *Web Apps • Desktop Apps • DevOps Tools*
 
 *Made with ❤️ and lots of ☕ by Christian*
@@ -365,6 +719,8 @@ I contributi sono super benvenuti!
 </div>
 ```
 
+
+```
 </details>
 
 ## 🚀 **Quick Start**
@@ -434,89 +790,3 @@ docker --version && docker run hello-world
 <table>
 <tr>
 <td>
-
-### 🎨 **Configurazioni finali** *(opzionali ma consigliate)*
-
-```bash
-# 🔧 Setup Git personale
-git config --global user.name "Il Tuo Nome"
-git config --global user.email "email@example.com"
-
-# � Zsh come shell di default (riavvio richiesto)
-chsh -s $(which zsh)
-
-# 📄 Apri il riepilogo HTML generato
-xdg-open ~/Documenti/setup-riepilogo.html
-```
-
-## �️ **Troubleshooting**
-
-<details>
-<summary>🚨 <b>Problemi comuni</b> <i>(click per soluzioni)</i></summary>
-
-### 🐳 **Docker non funziona**
-
-```bash
-# 1️⃣ Riavvia il terminale (importante!)
-# 2️⃣ Oppure logout + login
-# 3️⃣ Verifica gruppo: groups | grep docker
-```
-
-### 🦀 **Rust non trovato**
-
-```bash
-# Carica l'environment Rust
-source ~/.cargo/env
-echo 'source ~/.cargo/env' >> ~/.bashrc
-```
-
-### 💻 **VS Code non si avvia**
-
-```bash
-# Reinstallazione manuale
-sudo dnf remove code -y
-# Poi ri-esegui lo script
-```
-
-### 🌐 **Node/Yarn problemi**
-
-```bash
-# Reset Corepack
-corepack disable
-corepack enable
-```
-
-</details>
-
----
-
-## 💡 **Info & Support**
-
-<div align="center">
-
-### � **Project Stats**
-
-![Version](https://img.shields.io/badge/version-2.0.0-00D4AA?style=flat-square)
-![Fedora](https://img.shields.io/badge/Fedora-38%2B-51A2DA?style=flat-square)
-![Size](https://img.shields.io/badge/install_size-~3GB-orange?style=flat-square)
-
-### 🤝 **Contribuisci**
-
-[🐛 Bug Report](../../issues) • [✨ Feature Request](../../issues) • [📖 Documentation](../../wiki)
-
-### 📬 **Social**
-
-Made with ❤️ by [Christian K.P.](https://github.com/ChrisKp1710)
-*Follow per più script fighi!* 🔥
-
-</div>
-
----
-
-<div align="center">
-
-**🎉 Ready to code like a pro? 🚀**
-
-⭐ *Se ti è stato utile, lascia una stella!* ⭐
-
-</div>
