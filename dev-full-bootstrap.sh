@@ -541,8 +541,7 @@ cat <<EOF > "/home/$SUDO_USER/Documenti/setup-riepilogo.html"
       background: linear-gradient(135deg, rgba(67, 233, 123, 0.08) 0%, rgba(79, 172, 254, 0.05) 100%);
       border-radius: 16px;
       margin-bottom: 1rem;
-      border-left: 4px solid;
-      border-image: linear-gradient(135deg, #43e97b, #4facfe) 1;
+      border-left: 3px solid #43e97b;
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       align-items: center;
@@ -556,6 +555,7 @@ cat <<EOF > "/home/$SUDO_USER/Documenti/setup-riepilogo.html"
       transform: translateX(8px) scale(1.02);
       box-shadow: 0 8px 25px rgba(67, 233, 123, 0.2);
       color: #f7fafc;
+      border-left-color: #00f2fe;
     }
     
     .tool-list li::before {
