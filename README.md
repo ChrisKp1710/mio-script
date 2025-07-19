@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🔥 Dev Environment Bootstrap
+# �️ Setup Intelligente Dev Environment
 
-### *One script to rule them all* 🧙‍♂️
+### *Script automatico che installa solo quello che manca* �
 
-**Trasforma il tuo Fedora in una macchina da sviluppo in 5 minuti**
+**Trasforma il tuo Fedora in una macchina da sviluppo in 5 minuti - Zero sprechi!**
 
 <br>
 
@@ -27,16 +27,18 @@
 ![Last Commit](https://img.shields.io/github/last-commit/ChrisKp1710/mio-script?style=flat-square&color=00D4AA&logo=git)
 ![Forks](https://img.shields.io/github/forks/ChrisKp1710/mio-script?style=flat-square&color=orange&logo=github)
 
-## ✨ Il setup dei tuoi sogni
+## ✨ L'intelligenza che cambia tutto
 
-Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello che ti serve per:
+**🧠 SMART DETECTION**: Lo script controlla cosa hai già e installa SOLO quello che manca!
+**⚡ ZERO SPRECHI**: Niente reinstallazioni inutili - risparmia tempo e banda
+**📊 REPORT DETTAGLIATO**: Vedi esattamente cosa è stato fatto vs saltato
 
 <div align="center">
 
-🌐 **Web Development** → React, Next.js, Tailwind
-🦀 **Desktop Apps** → Rust + Tauri
-🐳 **DevOps** → Docker, Containers
-💻 **Pro Coding** → VS Code, terminal potenziato
+🌐 **Web Development** → React, Next.js, Tailwind, Yarn
+🦀 **Desktop Apps** → Rust + Tauri (app native veloci)
+🐳 **DevOps** → Docker, Podman, Container orchestration
+💻 **Pro Coding** → VS Code, shell tools, monitoring
 
 </div>
 
@@ -44,14 +46,44 @@ Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello ch
 
 <table>
 <tr>
-<td align="center">🎓<br><b>Studente</b><br>Setup università in un click</td>
-<td align="center">👨‍💼<br><b>Professionista</b><br>Ambiente pronto per progetti</td>
-<td align="center">🚀<br><b>Startup</b><br>Development stack completo</td>
+<td align="center">🎓<br><b>Studente</b><br>Setup università intelligente</td>
+<td align="center">👨‍💼<br><b>Professionista</b><br>Ambiente pronto, zero perdite tempo</td>
+<td align="center">🚀<br><b>Startup</b><br>Stack moderno in 5 minuti</td>
 <td align="center">🎮<br><b>Indie Dev</b><br>Web + desktop app ready</td>
 </tr>
 </table>
 
-### 🛠️ **Stack completo installato**
+### 🧠 **Funzionalità Intelligenti**
+
+<div align="center">
+
+| 🎯 **Smart Detection** | ⚡ **Installazione Selettiva** | 📊 **Riepilogo Dettagliato** |
+|---|---|---|
+| Controlla cosa è già presente | Installa SOLO quello che manca | Report terminale + HTML elegante |
+| Skip automatico dei componenti esistenti | Zero reinstallazioni inutili | Conta installazioni vs elementi saltati |
+| Verifica versioni e configurazioni | Risparmia tempo e bandwidth | Timestamp dinamico always accurate |
+
+</div>
+
+### � **Quick Start**
+
+```bash
+# 1. Clone del repository  
+git clone https://github.com/ChrisKp1710/mio-script.git
+cd mio-script
+
+# 2. Rendi eseguibile
+chmod +x dev-full-bootstrap.sh
+
+# 3. Esegui (richiede sudo)
+sudo ./dev-full-bootstrap.sh
+```
+
+**💡 Pro Tip**: Lo script è **idempotente** - puoi eseguirlo più volte senza problemi!
+- **Prima volta**: Installa tutto quello che serve
+- **Esecuzioni successive**: Aggiorna solo quello necessario
+
+### �🛠️ **Stack completo installato**
 
 <details>
 <summary>🧰 <b>Developer Tools</b> <i>(click per espandere)</i></summary>
@@ -59,10 +91,11 @@ Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello ch
 ```
 ✅ Git & Version Control
 ✅ Zsh (shell moderna) + Neovim (editor potente)  
-✅ Htop, btop (monitoraggio sistema)
-✅ Ripgrep, fzf (ricerca super veloce)
-✅ Tmux (terminale multiplo)
-✅ Compilatori C/C++ (gcc, cmake)
+✅ Htop, btop (monitoraggio sistema avanzato)
+✅ Ripgrep, fzf, bat (ricerca e navigazione super veloce)
+✅ Tmux (terminale multiplo professionale)
+✅ Build essentials (gcc, cmake, make)
+✅ Python3-pip, jq (data processing)
 ```
 
 </details>
@@ -71,11 +104,12 @@ Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello ch
 <summary>🌐 <b>Frontend Web Stack</b></summary>
 
 ```
-🚀 Node.js (runtime JavaScript)
-📦 Yarn (package manager veloce)  
-⚛️ Ready per: React, Next.js, Vue, Svelte
-🎨 Tailwind CSS supportato
-🔧 Build tools moderni inclusi
+🚀 Node.js (runtime JavaScript latest LTS)
+📦 Yarn via Corepack (package manager moderno)  
+⚛️ Ready per: React, Next.js, Vue, Svelte, Angular
+🎨 Tailwind CSS supportato out-of-the-box
+🔧 Build tools: Vite, Webpack, esbuild compatible
+⚡ Hot reload e development server ready
 ```
 
 </details>
@@ -84,11 +118,12 @@ Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello ch
 <summary>🦀 <b>Rust + Desktop Development</b></summary>
 
 ```
-🦀 Rust Toolchain completo
-🖥️ Tauri CLI (app desktop native)
-⚡ Performance native + Web UI
-🔒 App sicure e leggere
-🌍 Cross-platform ready
+🦀 Rust Toolchain completo (rustc, cargo, rustup)
+🖥️ Tauri CLI (app desktop native cross-platform)
+⚡ Performance native + interfaccia web moderna
+🔒 App sicure, veloci e con bundle ridotti
+🌍 Target: Windows, macOS, Linux
+🔧 Shell integration automatica (bash/zsh)
 ```
 
 </details>
@@ -96,12 +131,16 @@ Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello ch
 <details>
 <summary>🐳 <b>DevOps & Containers</b></summary>
 
+<details>
+<summary>🐳 <b>DevOps & Containers</b></summary>
+
 ```
-🐳 Docker + Docker Compose
-🔨 Podman + Buildah (alternative Red Hat)
-☁️ Pronto per deployment cloud
-🔄 CI/CD ready
-🛡️ Sicurezza enterprise
+🐳 Docker + Docker Compose (orchestration)
+🔨 Podman + Buildah (Red Hat container stack)  
+🔄 Container runtime completo
+👤 User groups configurati automaticamente
+🚀 Pronto per deployment e CI/CD
+🛡️ Security best practices integrate
 ```
 
 </details>
@@ -110,11 +149,172 @@ Stop a ore di configurazioni noiose! 🙄 Questo script installa tutto quello ch
 <summary>💻 <b>Professional Editor</b></summary>
 
 ```
-📝 Visual Studio Code (official Microsoft)
-🔌 Extensions ecosystem
-🐛 Debugging integrato  
-📊 Git integration
-🎨 Temi e personalizzazioni
+📝 Visual Studio Code (repository Microsoft ufficiale)
+🔌 Extensions marketplace access completo
+🐛 Debugging integrato multi-language
+🔗 Git integration seamless
+🧠 IntelliSense e autocompletamento
+🎨 Themes e personalizzazione avanzata
+```
+
+</details>
+
+---
+
+## � **Report HTML Professionale**
+
+Dopo l'esecuzione, troverai un bellissimo report in `~/Documenti/setup-riepilogo.html`:
+
+<div align="center">
+
+🎨 **Design Moderno** → Glass morphism, gradienti, animazioni  
+📱 **Mobile Responsive** → Ottimizzato per ogni dispositivo  
+📅 **Timestamp Dinamico** → Ora sempre aggiornata (multi-timezone)  
+📈 **Statistiche Dettagliate** → Cosa installato vs saltato  
+
+</div>
+
+## 🔄 **Esempi d'Uso Intelligente**
+
+<table align="center">
+<tr>
+<th>🆕 Macchina Nuova</th>
+<th>🔄 Sistema Parziale</th>  
+<th>✅ Verifica Setup</th>
+</tr>
+<tr>
+<td>
+  
+```bash
+sudo ./dev-full-bootstrap.sh
+# ➡️ Installa tutto completo
+# 🎯 Report: 15+ installazioni
+```
+
+</td>
+<td>
+
+```bash  
+sudo ./dev-full-bootstrap.sh
+# ➡️ Solo quello che manca
+# 🎯 Report: 3 installazioni, 12 skip
+```
+
+</td>
+<td>
+
+```bash
+sudo ./dev-full-bootstrap.sh  
+# ➡️ Tutto già presente
+# 🎯 Report: 0 installazioni, 15 skip
+```
+
+</td>
+</tr>
+</table>
+
+## 🚀 **Quick Start dopo Setup**
+
+Riavvia il terminale e inizia subito:
+
+```bash
+# 🌐 Nuova web app moderna
+npx create-next-app@latest my-web-app
+cd my-web-app && yarn dev
+
+# 🦀 Nuova desktop app cross-platform  
+mkdir my-desktop-app && cd my-desktop-app
+tauri init
+
+# 🐳 Test container environment
+docker run hello-world
+
+```
+
+## �️ **Troubleshooting**
+
+<details>
+<summary><strong>❓ Tauri CLI non trovato dopo installazione</strong></summary>
+
+**Soluzione**: Riavvia il terminale o esegui:
+```bash
+source ~/.cargo/env
+# Il comando 'tauri' sarà disponibile come alias di 'cargo tauri'
+```
+
+</details>
+
+<details>
+<summary><strong>❓ Docker permission denied</strong></summary>
+
+**Soluzione**: Riavvia la sessione utente o esegui:
+```bash  
+newgrp docker
+# Oppure logout/login per attivare il gruppo
+```
+
+</details>
+
+<details>
+<summary><strong>❓ Yarn non risponde o chiede conferme</strong></summary>
+
+**Soluzione**: Lo script usa modalità non-interattiva, ma se hai problemi:
+```bash
+corepack enable
+yarn --version  
+```
+
+</details>
+
+---
+
+## 🤝 **Contribuire**
+
+I contributi sono super benvenuti! 
+
+1. **Fork** il repository 🍴
+2. **Crea** un branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** (`git commit -m 'Add AmazingFeature'`) 
+4. **Push** (`git push origin feature/AmazingFeature`)
+5. **Apri** una Pull Request 🚀
+
+### 📈 **Roadmap Ideas**
+- [ ] Supporto Ubuntu/Debian  
+- [ ] Profili personalizzati (Frontend-only, Backend-only)
+- [ ] Auto-install VS Code extensions
+- [ ] Dotfiles configuration
+- [ ] Package managers aggiuntivi (pnpm, bun)
+
+---
+
+<div align="center">
+
+## 👨‍💻 **Autore**
+
+**Christian Koscielniak-Pinto**
+
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-kodechris.dev-00D4AA?style=for-the-badge&logo=internet-explorer&logoColor=white)](https://kodechris.dev/)
+[![GitHub](https://img.shields.io/badge/💻_GitHub-ChrisKp1710-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ChrisKp1710)  
+[![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-christian--koscielniak--pinto-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/christian-koscielniak-pinto)
+[![Email](https://img.shields.io/badge/�_Email-christian@kodechris.dev-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:christian@kodechris.dev)
+
+---
+
+### ⭐ **Ti è stato utile?**
+
+**Lascia una stella su GitHub!** ⭐ Aiuta altri developer a trovare questo progetto
+
+---
+
+**Setup intelligente per sviluppatori moderni** 🚀  
+*Web Apps • Desktop Apps • DevOps Tools*
+
+*Made with ❤️ and lots of ☕ by Christian*
+
+![Fedora](https://img.shields.io/badge/Built_for-Fedora_Workstation-51A2DA?style=flat-square&logo=fedora&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square&logo=opensourceinitiative&logoColor=white)
+
+</div>
 ```
 
 </details>
