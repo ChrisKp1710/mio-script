@@ -207,63 +207,298 @@ cat <<EOF > "/home/$SUDO_USER/Documenti/setup-riepilogo.html"
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Setup Dev - Christian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔥 Dev Environment Setup - Christian</title>
   <style>
-    body { font-family: sans-serif; background: #0e0e17; color: #eee; padding: 2rem; }
-    h1, h2 { color: #00f2ff; }
-    ul { line-height: 1.7; }
-    li::before { content: "🔸 "; color: orange; }
-    .section { margin-bottom: 2rem; }
-    code { background: #222; padding: 2px 6px; border-radius: 5px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+      color: #e0e6ed;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    
+    .info-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .info-card strong {
+      color: #00d4aa;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .tool-section {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tool-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 212, 170, 0.15);
+    }
+    
+    .tool-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .tool-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .icon {
+      font-size: 1.8rem;
+    }
+    
+    .tool-list {
+      list-style: none;
+      space-y: 0.5rem;
+    }
+    
+    .tool-list li {
+      padding: 0.8rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+      border-left: 4px solid #00d4aa;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+    
+    .tool-list li:hover {
+      background: rgba(0, 212, 170, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .tool-list li::before {
+      content: '✨';
+      margin-right: 0.8rem;
+      font-size: 1.2rem;
+    }
+    
+    code {
+      background: rgba(0, 0, 0, 0.4);
+      color: #00d4aa;
+      padding: 0.3rem 0.8rem;
+      border-radius: 8px;
+      font-family: 'Fira Code', 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      border: 1px solid rgba(0, 212, 170, 0.3);
+    }
+    
+    .success-message {
+      background: linear-gradient(135deg, #00d4aa 0%, #00b894 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 3rem;
+      box-shadow: 0 10px 30px rgba(0, 212, 170, 0.2);
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.6;
+    }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .container { padding: 1rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>Setup Ambiente Sviluppo - Christian</h1>
-  <p><strong>Ultimo aggiornamento:</strong> 19/07/2025 12:30</p>
-  <p><strong>Distribuzione:</strong> Fedora Workstation</p>
-  <p><strong>Utente:</strong> $SUDO_USER</p>
-
-  <div class="section">
-    <h2>Tool Base</h2>
-    <ul>
-      <li>zsh, neovim, git, curl, wget</li>
-      <li>gcc, cmake, python3-pip, bat</li>
-      <li>htop, btop, jq, ripgrep, fzf, tmux</li>
-    </ul>
+  <div class="container">
+    <div class="header">
+      <h1>🔥 Dev Environment Setup</h1>
+      <div class="subtitle">Ambiente di sviluppo completo configurato con successo</div>
+    </div>
+    
+    <div class="info-grid">
+      <div class="info-card">
+        <strong>📅 Data Setup</strong>
+        <div>19/07/2025 12:30</div>
+      </div>
+      <div class="info-card">
+        <strong>💻 Sistema</strong>
+        <div>Fedora Workstation</div>
+      </div>
+      <div class="info-card">
+        <strong>👤 Utente</strong>
+        <div>$SUDO_USER</div>
+      </div>
+      <div class="info-card">
+        <strong>⚡ Status</strong>
+        <div style="color: #00d4aa;">Setup Completato</div>
+      </div>
+    </div>
+    
+    <div class="tools-grid">
+      <div class="tool-section">
+        <h2><span class="icon">🧰</span> Tool Base</h2>
+        <ul class="tool-list">
+          <li>Shell & Editor: zsh, neovim</li>
+          <li>Version Control: git</li>
+          <li>Network Tools: curl, wget</li>
+          <li>Build Tools: gcc, cmake, make</li>
+          <li>System Monitor: htop, btop</li>
+          <li>Search & Navigation: ripgrep, fzf, bat</li>
+          <li>Terminal Multiplexer: tmux</li>
+          <li>Data Processing: jq</li>
+          <li>Python: python3-pip</li>
+        </ul>
+      </div>
+      
+      <div class="tool-section">
+        <h2><span class="icon">🌐</span> Frontend Web</h2>
+        <ul class="tool-list">
+          <li>Runtime: Node.js (Latest)</li>
+          <li>Package Manager: Yarn (via Corepack)</li>
+          <li>Framework Ready: React, Next.js</li>
+          <li>Styling: Tailwind CSS Support</li>
+          <li>Build Tools: Vite, Webpack</li>
+          <li>Development: Hot Reload Ready</li>
+        </ul>
+      </div>
+      
+      <div class="tool-section">
+        <h2><span class="icon">🦀</span> Rust + Tauri</h2>
+        <ul class="tool-list">
+          <li>Rust Toolchain: rustc, cargo</li>
+          <li>Desktop Apps: <code>tauri-cli</code></li>
+          <li>Cross-Platform: Windows, macOS, Linux</li>
+          <li>Web Technologies: HTML, CSS, JS</li>
+          <li>Native Performance: Rust Backend</li>
+          <li>Small Bundle Size: Ottimizzato</li>
+        </ul>
+      </div>
+      
+      <div class="tool-section">
+        <h2><span class="icon">🐳</span> Container & DevOps</h2>
+        <ul class="tool-list">
+          <li>Container Runtime: Docker</li>
+          <li>Orchestration: Docker Compose</li>
+          <li>Red Hat Stack: Podman</li>
+          <li>Image Building: Buildah</li>
+          <li>Container Management: Podman Compose</li>
+          <li>Development: Isolated Environments</li>
+        </ul>
+      </div>
+      
+      <div class="tool-section">
+        <h2><span class="icon">💻</span> Code Editor</h2>
+        <ul class="tool-list">
+          <li>Editor: Visual Studio Code</li>
+          <li>Extensions: Marketplace Access</li>
+          <li>Debugging: Integrated Debugger</li>
+          <li>Git Integration: Source Control</li>
+          <li>IntelliSense: Smart Completion</li>
+          <li>Themes: Customizable Interface</li>
+        </ul>
+      </div>
+      
+      <div class="tool-section">
+        <h2><span class="icon">⚡</span> Quick Start</h2>
+        <ul class="tool-list">
+          <li>Web App: <code>npx create-next-app@latest</code></li>
+          <li>Desktop App: <code>cargo tauri init</code></li>
+          <li>Container: <code>docker run hello-world</code></li>
+          <li>Code Editor: <code>code .</code></li>
+          <li>Version Check: <code>rustc --version</code></li>
+          <li>Package Manager: <code>yarn --version</code></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="success-message">
+      🎉 Tutto pronto per iniziare a creare applicazioni moderne!<br>
+      <small style="opacity: 0.9;">Web apps, desktop apps, containerized services - tutto configurato e pronto all'uso</small>
+    </div>
+    
+    <div class="footer">
+      <p>Setup automatico creato con ❤️ da Christian K.P.</p>
+      <p>Fedora Development Environment • 2025</p>
+    </div>
   </div>
-
-  <div class="section">
-    <h2>Frontend Web</h2>
-    <ul>
-      <li>Node.js + Yarn (con Corepack)</li>
-      <li>Pronto per React, Next.js, Tailwind CSS</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Rust + Tauri</h2>
-    <ul>
-      <li>Rust Toolchain</li>
-      <li><code>tauri-cli</code> per desktop app</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Container & DevOps</h2>
-    <ul>
-      <li>Docker + Docker Compose</li>
-      <li>Podman + Buildah</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Editor</h2>
-    <ul>
-      <li>Visual Studio Code</li>
-    </ul>
-  </div>
-
-  <p>✅ Tutto pronto per iniziare a creare il tuo sito e la tua app desktop!</p>
 </body>
 </html>
 EOF
