@@ -56,17 +56,16 @@ log "Yarn installato e attivo"
 ## ───────────────────────────────────────
 title "Rust + Tauri"
 
-if ! command -v cargo &> /dev/null; then
-  log "Installazione Rust..."
-  curl https://sh.rustup.rs -sSf | sh -s -- -y
-  source $HOME/.cargo/env
+if ! su - "$SUDO_USER" -c "command -v cargo &> /dev/null"; then
+  log "Installazione Rust per $SUDO_USER..."
+  su - "$SUDO_USER" -c 'curl https://sh.rustup.rs -sSf | sh -s -- -y && source "$HOME/.cargo/env"'
 else
   log "Rust già presente"
 fi
 
-if ! cargo install --list | grep -q tauri-cli; then
+if ! su - "$SUDO_USER" -c "cargo install --list | grep -q tauri-cli"; then
   log "Installazione tauri-cli..."
-  cargo install tauri-cli
+  su - "$SUDO_USER" -c "source ~/.cargo/env && cargo install tauri-cli"
 else
   log "tauri-cli già installato"
 fi
@@ -180,4 +179,3 @@ cat <<EOF > "/home/$SUDO_USER/Documenti/setup-riepilogo.html"
 EOF
 
 log "Riepilogo generato in: /home/$SUDO_USER/Documenti/setup-riepilogo.html"
-
